@@ -1,0 +1,919 @@
+{
+  "heroVideos": [
+    {
+      "id": 1,
+      "title": "Digital Transformation",
+      "url": "/videos/hero.mp4",
+      "thumbnail": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&h=1080&fit=crop",
+      "description": "Powering Global Digital Transformation"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sarah Johnson",
+      "role": "CTO, TechCorp",
+      "company": "TechCorp Inc.",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "Outstanding digital transformation partner. Their expertise and commitment to excellence have transformed our business operations.",
+      "date": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "name": "Michael Chen",
+      "role": "VP Engineering, GlobalSoft",
+      "company": "GlobalSoft",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "Highly secure and scalable delivery. They've exceeded our expectations in every project we've collaborated on.",
+      "date": "2024-02-20"
+    },
+    {
+      "id": 3,
+      "name": "Emily Rodriguez",
+      "role": "Director of Innovation, InnovateCo",
+      "company": "InnovateCo",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "Trusted enterprise solutions. Their team's dedication and technical prowess make them an invaluable partner.",
+      "date": "2024-03-10"
+    },
+    {
+      "id": 4,
+      "name": "David Thompson",
+      "role": "CEO, FutureTech",
+      "company": "FutureTech",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "Exceptional service delivery and innovative solutions. They've been instrumental in our digital journey.",
+      "date": "2024-04-05"
+    },
+    {
+      "id": 5,
+      "name": "Lisa Anderson",
+      "role": "Head of Digital, MegaCorp",
+      "company": "MegaCorp",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "World-class expertise and unmatched professionalism. Highly recommend for any enterprise transformation project.",
+      "date": "2024-05-12"
+    },
+    {
+      "id": 6,
+      "name": "James Wilson",
+      "role": "CIO, FinanceHub",
+      "company": "FinanceHub",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "rating": 5,
+      "text": "Their solutions have revolutionized our operations. Outstanding team and exceptional results.",
+      "date": "2024-06-18"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": 1,
+      "title": "Enterprise Cloud Migration",
+      "client": "Fortune 500 Retail Chain",
+      "industry": "Retail",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
+      "description": "Successfully migrated 500+ applications to cloud infrastructure, reducing costs by 40% and improving scalability.",
+      "results": {
+        "costReduction": "40%",
+        "performanceImprovement": "60%",
+        "timeline": "18 months"
+      },
+      "tags": ["Cloud", "Migration", "Scalability"],
+      "year": 2023
+    },
+    {
+      "id": 2,
+      "title": "AI-Powered Analytics Platform",
+      "client": "Global Financial Services",
+      "industry": "Finance",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      "description": "Built comprehensive AI analytics platform processing 10M+ transactions daily with real-time insights.",
+      "results": {
+        "dataProcessed": "10M+ daily",
+        "insightAccuracy": "95%",
+        "timeline": "12 months"
+      },
+      "tags": ["AI", "Analytics", "Real-time"],
+      "year": 2023
+    },
+    {
+      "id": 3,
+      "title": "Digital Customer Experience",
+      "client": "Leading Healthcare Provider",
+      "industry": "Healthcare",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
+      "description": "Transformed patient experience with unified digital platform, increasing satisfaction scores by 50%.",
+      "results": {
+        "satisfactionIncrease": "50%",
+        "userAdoption": "85%",
+        "timeline": "9 months"
+      },
+      "tags": ["Healthcare", "UX", "Digital"],
+      "year": 2024
+    },
+    {
+      "id": 4,
+      "title": "IoT Manufacturing Solution",
+      "client": "Industrial Manufacturing Leader",
+      "industry": "Manufacturing",
+      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+      "description": "Implemented IoT solution connecting 10,000+ devices, optimizing production efficiency by 35%.",
+      "results": {
+        "efficiencyGain": "35%",
+        "devicesConnected": "10,000+",
+        "timeline": "15 months"
+      },
+      "tags": ["IoT", "Manufacturing", "Optimization"],
+      "year": 2024
+    },
+    {
+      "id": 5,
+      "title": "Cybersecurity Transformation",
+      "client": "Multinational Corporation",
+      "industry": "Enterprise",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
+      "description": "Enhanced security posture across 50+ global offices with zero-trust architecture and advanced threat detection.",
+      "results": {
+        "threatsBlocked": "99.9%",
+        "incidentResponse": "90% faster",
+        "timeline": "24 months"
+      },
+      "tags": ["Security", "Zero-Trust", "Enterprise"],
+      "year": 2024
+    },
+    {
+      "id": 6,
+      "title": "Mobile-First E-Commerce",
+      "client": "Leading Fashion Retailer",
+      "industry": "E-Commerce",
+      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+      "description": "Launched mobile-first platform driving 200% increase in mobile sales and 60% improvement in conversion rates.",
+      "results": {
+        "salesIncrease": "200%",
+        "conversionRate": "60%",
+        "timeline": "6 months"
+      },
+      "tags": ["Mobile", "E-Commerce", "Conversion"],
+      "year": 2024
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "Cloud Solutions",
+      "icon": "☁️",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+      "description": "Comprehensive cloud migration, architecture, and optimization services for enterprises.",
+      "features": ["AWS/Azure/GCP", "Multi-cloud Strategy", "Cost Optimization", "DevOps Integration"],
+      "category": "Infrastructure"
+    },
+    {
+      "id": 2,
+      "title": "AI & Machine Learning",
+      "icon": "🤖",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+      "description": "Build intelligent systems with cutting-edge AI and ML technologies.",
+      "features": ["Custom Models", "MLOps", "Predictive Analytics", "NLP & Computer Vision"],
+      "category": "AI"
+    },
+    {
+      "id": 3,
+      "title": "Cybersecurity",
+      "icon": "🔒",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop",
+      "description": "Enterprise-grade security solutions to protect your digital assets.",
+      "features": ["Zero-Trust Architecture", "Threat Detection", "Compliance", "Security Audits"],
+      "category": "Security"
+    },
+    {
+      "id": 4,
+      "title": "Digital Transformation",
+      "icon": "🚀",
+      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+      "description": "End-to-end digital transformation consulting and implementation.",
+      "features": ["Strategy Consulting", "Process Automation", "Legacy Modernization", "Change Management"],
+      "category": "Consulting"
+    },
+    {
+      "id": 5,
+      "title": "Data Analytics",
+      "icon": "📊",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+      "description": "Turn data into actionable insights with advanced analytics platforms.",
+      "features": ["Big Data", "Real-time Analytics", "Business Intelligence", "Data Warehousing"],
+      "category": "Analytics"
+    },
+    {
+      "id": 6,
+      "title": "Mobile Development",
+      "icon": "📱",
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop",
+      "description": "Native and cross-platform mobile applications for iOS and Android.",
+      "features": ["Native Apps", "React Native", "Flutter", "Progressive Web Apps"],
+      "category": "Development",
+      "videoUrl": "https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4"
+    },
+    {
+      "id": 7,
+      "title": "Blockchain Solutions",
+      "icon": "⛓️",
+      "image": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+      "description": "Enterprise blockchain development and smart contract implementation.",
+      "features": ["Smart Contracts", "DeFi Solutions", "NFT Platforms", "Blockchain Consulting"],
+      "category": "Blockchain"
+    },
+    {
+      "id": 8,
+      "title": "IoT & Edge Computing",
+      "icon": "🌐",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
+      "description": "Connect and manage devices with IoT platforms and edge computing solutions.",
+      "features": ["IoT Platforms", "Edge Computing", "Device Management", "Real-time Analytics"],
+      "category": "IoT"
+    },
+    {
+      "id": 9,
+      "title": "DevOps & CI/CD",
+      "icon": "⚙️",
+      "image": "https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?w=600&h=400&fit=crop",
+      "description": "Automate deployments and streamline development workflows with DevOps practices.",
+      "features": ["CI/CD Pipelines", "Infrastructure as Code", "Container Orchestration", "Monitoring"],
+      "category": "DevOps"
+    },
+    {
+      "id": 10,
+      "title": "UI/UX Design",
+      "icon": "🎨",
+      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+      "description": "Create beautiful and intuitive user experiences for web and mobile applications.",
+      "features": ["User Research", "Wireframing", "Prototyping", "Design Systems"],
+      "category": "Design"
+    },
+    {
+      "id": 11,
+      "title": "API Development",
+      "icon": "🔌",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
+      "description": "Build robust and scalable APIs for seamless system integration.",
+      "features": ["REST APIs", "GraphQL", "API Gateway", "Microservices"],
+      "category": "Backend"
+    },
+    {
+      "id": 12,
+      "title": "Quality Assurance",
+      "icon": "✅",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      "description": "Comprehensive testing services to ensure software quality and reliability.",
+      "features": ["Automated Testing", "Performance Testing", "Security Testing", "QA Consulting"],
+      "category": "Testing"
+    },
+    {
+      "id": 13,
+      "title": "Enterprise Consulting",
+      "icon": "💼",
+      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+      "description": "Strategic consulting to drive digital transformation and business growth.",
+      "features": ["Strategy Planning", "Technology Roadmaps", "Business Process Optimization", "Change Management"],
+      "category": "Consulting"
+    },
+    {
+      "id": 14,
+      "title": "Cloud Migration",
+      "icon": "🚀",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+      "description": "Seamless migration to cloud platforms with zero downtime strategies.",
+      "features": ["AWS Migration", "Azure Migration", "GCP Migration", "Hybrid Cloud"],
+      "category": "Infrastructure"
+    },
+    {
+      "id": 15,
+      "title": "Managed Services",
+      "icon": "⚡",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
+      "description": "24/7 managed IT services to keep your infrastructure running smoothly.",
+      "features": ["24/7 Monitoring", "Proactive Support", "Incident Management", "Performance Optimization"],
+      "category": "Infrastructure"
+    },
+    {
+      "id": 16,
+      "title": "Data Engineering",
+      "icon": "📈",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+      "description": "Build robust data pipelines and infrastructure for analytics and ML.",
+      "features": ["ETL Pipelines", "Data Warehousing", "Data Lake Solutions", "Real-time Processing"],
+      "category": "Analytics"
+    }
+  ],
+  "industries": [
+    {
+      "id": 1,
+      "name": "Healthcare",
+      "icon": "🏥",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
+      "description": "Digital solutions for healthcare providers and medical institutions.",
+      "projects": 45
+    },
+    {
+      "id": 2,
+      "name": "Finance",
+      "icon": "💰",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+      "description": "Secure fintech solutions and financial services platforms.",
+      "projects": 62
+    },
+    {
+      "id": 3,
+      "name": "Retail",
+      "icon": "🛒",
+      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+      "description": "E-commerce platforms and retail technology solutions.",
+      "projects": 38
+    },
+    {
+      "id": 4,
+      "name": "Manufacturing",
+      "icon": "🏭",
+      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+      "description": "IoT and automation solutions for manufacturing industries.",
+      "projects": 29
+    },
+    {
+      "id": 5,
+      "name": "Education",
+      "icon": "🎓",
+      "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop",
+      "description": "EdTech platforms and learning management systems.",
+      "projects": 33
+    },
+    {
+      "id": 6,
+      "name": "Energy",
+      "icon": "⚡",
+      "image": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop",
+      "description": "Smart grid and energy management solutions.",
+      "projects": 21
+    }
+  ],
+  "stats": [
+    {
+      "id": 1,
+      "label": "Clients Served",
+      "value": "500+",
+      "icon": "👥",
+      "trend": "+15%"
+    },
+    {
+      "id": 2,
+      "label": "Projects Completed",
+      "value": "1,200+",
+      "icon": "✅",
+      "trend": "+25%"
+    },
+    {
+      "id": 3,
+      "label": "Countries",
+      "value": "50+",
+      "icon": "🌍",
+      "trend": "+3"
+    },
+    {
+      "id": 4,
+      "label": "Team Members",
+      "value": "2,500+",
+      "icon": "👨‍💼",
+      "trend": "+200"
+    }
+  ],
+  "investors": [
+    {
+      "id": 1,
+      "name": "TechVentures",
+      "logo": "https://via.placeholder.com/200x100/00F5D4/000000?text=TechVentures",
+      "type": "VC Firm",
+      "investment": "Series B"
+    },
+    {
+      "id": 2,
+      "name": "Global Capital",
+      "logo": "https://via.placeholder.com/200x100/00F5D4/000000?text=Global+Capital",
+      "type": "Private Equity",
+      "investment": "Series C"
+    },
+    {
+      "id": 3,
+      "name": "Innovate Fund",
+      "logo": "https://via.placeholder.com/200x100/00F5D4/000000?text=Innovate+Fund",
+      "type": "VC Firm",
+      "investment": "Series A"
+    },
+    {
+      "id": 4,
+      "name": "Enterprise Partners",
+      "logo": "https://via.placeholder.com/200x100/00F5D4/000000?text=Enterprise+Partners",
+      "type": "Strategic Investor",
+      "investment": "Series B"
+    }
+  ],
+  "ratings": [
+    {
+      "id": 1,
+      "platform": "G2",
+      "rating": 4.8,
+      "reviews": 1250,
+      "icon": "⭐"
+    },
+    {
+      "id": 2,
+      "platform": "Trustpilot",
+      "rating": 4.9,
+      "reviews": 890,
+      "icon": "⭐"
+    },
+    {
+      "id": 3,
+      "platform": "Clutch",
+      "rating": 4.7,
+      "reviews": 650,
+      "icon": "⭐"
+    }
+  ],
+  "team": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "role": "CEO & Founder",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "bio": "20+ years in enterprise technology",
+      "linkedin": "#"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Williams",
+      "role": "CTO",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+      "bio": "Former Google Engineering Lead",
+      "linkedin": "#"
+    },
+    {
+      "id": 3,
+      "name": "Michael Brown",
+      "role": "VP of Sales",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+      "bio": "15+ years driving enterprise sales",
+      "linkedin": "#"
+    },
+    {
+      "id": 4,
+      "name": "Emily Davis",
+      "role": "Head of Design",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+      "bio": "Award-winning UX designer",
+      "linkedin": "#"
+    },
+    {
+      "id": 5,
+      "name": "Robert Johnson",
+      "role": "VP of Engineering",
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
+      "bio": "Ex-Microsoft Principal Architect",
+      "linkedin": "#"
+    },
+    {
+      "id": 6,
+      "name": "Jennifer Martinez",
+      "role": "CFO",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
+      "bio": "Former Goldman Sachs Executive",
+      "linkedin": "#"
+    },
+    {
+      "id": 7,
+      "name": "David Lee",
+      "role": "VP of Product",
+      "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop",
+      "bio": "Product innovation expert",
+      "linkedin": "#"
+    },
+    {
+      "id": 8,
+      "name": "Maria Garcia",
+      "role": "Head of HR",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+      "bio": "Talent acquisition leader",
+      "linkedin": "#"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Senior Full Stack Engineer",
+      "department": "Engineering",
+      "location": "San Francisco, CA / Remote",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "description": "Build scalable web applications using React, Node.js, and cloud technologies.",
+      "requirements": ["React", "Node.js", "AWS", "TypeScript", "5+ years experience"],
+      "posted": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "title": "Cloud Solutions Architect",
+      "department": "Engineering",
+      "location": "New York, NY / Hybrid",
+      "type": "Full-time",
+      "experience": "7+ years",
+      "description": "Design and implement cloud infrastructure solutions for enterprise clients.",
+      "requirements": ["AWS/Azure/GCP", "Kubernetes", "Terraform", "7+ years experience"],
+      "posted": "2024-01-20"
+    },
+    {
+      "id": 3,
+      "title": "AI/ML Engineer",
+      "department": "Data Science",
+      "location": "Seattle, WA / Remote",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "description": "Develop machine learning models and AI solutions for enterprise applications.",
+      "requirements": ["Python", "TensorFlow", "PyTorch", "MLOps", "4+ years experience"],
+      "posted": "2024-01-25"
+    },
+    {
+      "id": 4,
+      "title": "Cybersecurity Specialist",
+      "department": "Security",
+      "location": "Austin, TX / Remote",
+      "type": "Full-time",
+      "experience": "6+ years",
+      "description": "Protect enterprise systems and conduct security assessments.",
+      "requirements": ["Cybersecurity", "Penetration Testing", "SOC", "6+ years experience"],
+      "posted": "2024-02-01"
+    },
+    {
+      "id": 5,
+      "title": "Product Designer",
+      "department": "Design",
+      "location": "London, UK / Remote",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "description": "Create intuitive user experiences for enterprise software products.",
+      "requirements": ["Figma", "UX/UI Design", "User Research", "4+ years experience"],
+      "posted": "2024-02-05"
+    },
+    {
+      "id": 6,
+      "title": "DevOps Engineer",
+      "department": "Engineering",
+      "location": "Berlin, Germany / Remote",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "description": "Automate infrastructure and streamline development workflows.",
+      "requirements": ["Docker", "CI/CD", "Kubernetes", "GitOps", "5+ years experience"],
+      "posted": "2024-02-10"
+    },
+    {
+      "id": 7,
+      "title": "Software Engineering Intern",
+      "department": "Engineering",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Summer internship for students to gain hands-on experience in software development.",
+      "requirements": ["Computer Science student", "Programming skills", "Enthusiasm"],
+      "posted": "2024-02-15"
+    },
+    {
+      "id": 8,
+      "title": "Sales Engineer",
+      "department": "Sales",
+      "location": "Chicago, IL / Hybrid",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "description": "Work with enterprise clients to understand their technical needs and propose solutions.",
+      "requirements": ["Technical Sales", "Enterprise Software", "Communication", "3+ years experience"],
+      "posted": "2024-02-20"
+    },
+    {
+      "id": 9,
+      "title": "Data Engineer",
+      "department": "Data Science",
+      "location": "Toronto, Canada / Remote",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "description": "Design and build scalable data pipelines and infrastructure for enterprise analytics.",
+      "requirements": ["Python", "Spark", "Airflow", "Data Warehousing", "4+ years experience"],
+      "posted": "2024-02-25"
+    },
+    {
+      "id": 10,
+      "title": "Frontend Developer",
+      "department": "Engineering",
+      "location": "Amsterdam, Netherlands / Remote",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "description": "Create beautiful and responsive user interfaces using modern frontend technologies.",
+      "requirements": ["React", "TypeScript", "CSS/SCSS", "UI/UX", "3+ years experience"],
+      "posted": "2024-03-01"
+    },
+    {
+      "id": 11,
+      "title": "Backend Developer",
+      "department": "Engineering",
+      "location": "Sydney, Australia / Remote",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "description": "Build robust and scalable backend services and APIs for enterprise applications.",
+      "requirements": ["Java/Python", "REST APIs", "Microservices", "Database Design", "4+ years experience"],
+      "posted": "2024-03-05"
+    },
+    {
+      "id": 12,
+      "title": "Project Manager",
+      "department": "Operations",
+      "location": "Singapore / Hybrid",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "description": "Lead cross-functional teams to deliver complex enterprise projects on time and within budget.",
+      "requirements": ["PMP Certification", "Agile/Scrum", "Stakeholder Management", "5+ years experience"],
+      "posted": "2024-03-10"
+    },
+    {
+      "id": 13,
+      "title": "QA Automation Engineer",
+      "department": "Engineering",
+      "location": "Bangalore, India / Remote",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "description": "Develop and maintain automated test suites to ensure product quality and reliability.",
+      "requirements": ["Selenium", "Cypress", "Test Automation", "CI/CD", "3+ years experience"],
+      "posted": "2024-03-15"
+    },
+    {
+      "id": 14,
+      "title": "Business Analyst",
+      "department": "Product",
+      "location": "Boston, MA / Hybrid",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "description": "Analyze business requirements and translate them into technical specifications.",
+      "requirements": ["Business Analysis", "Requirements Gathering", "SQL", "3+ years experience"],
+      "posted": "2024-03-20"
+    },
+    {
+      "id": 15,
+      "title": "Technical Writer",
+      "department": "Product",
+      "location": "Portland, OR / Remote",
+      "type": "Full-time",
+      "experience": "2+ years",
+      "description": "Create comprehensive technical documentation for APIs, products, and developer tools.",
+      "requirements": ["Technical Writing", "API Documentation", "Markdown", "2+ years experience"],
+      "posted": "2024-03-25"
+    },
+    {
+      "id": 16,
+      "title": "Data Science Intern",
+      "department": "Data Science",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Summer internship for students interested in machine learning and data analytics.",
+      "requirements": ["Data Science student", "Python", "Statistics", "Enthusiasm"],
+      "posted": "2024-02-15"
+    },
+    {
+      "id": 17,
+      "title": "Cybersecurity Intern",
+      "department": "Security",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Gain hands-on experience in cybersecurity, threat analysis, and security protocols.",
+      "requirements": ["Cybersecurity student", "Security fundamentals", "Analytical skills"],
+      "posted": "2024-02-15"
+    },
+    {
+      "id": 18,
+      "title": "Product Design Intern",
+      "department": "Design",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Work on real design projects and learn from experienced product designers.",
+      "requirements": ["Design student", "Figma", "Portfolio", "Creative thinking"],
+      "posted": "2024-02-15"
+    },
+    {
+      "id": 19,
+      "title": "Marketing Intern",
+      "department": "Marketing",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Support marketing campaigns and learn digital marketing strategies for B2B tech.",
+      "requirements": ["Marketing student", "Content creation", "Social media", "Communication"],
+      "posted": "2024-02-15"
+    },
+    {
+      "id": 20,
+      "title": "DevOps Intern",
+      "department": "Engineering",
+      "location": "Multiple Locations",
+      "type": "Internship",
+      "experience": "Student",
+      "description": "Learn cloud infrastructure, CI/CD pipelines, and automation tools.",
+      "requirements": ["Computer Science student", "Linux", "Basic scripting", "Interest in DevOps"],
+      "posted": "2024-02-15"
+    }
+  ],
+  "awards": [
+    {
+      "id": 1,
+      "title": "Best Enterprise Software Provider",
+      "organization": "Tech Awards 2024",
+      "year": 2024,
+      "icon": "🏆"
+    },
+    {
+      "id": 2,
+      "title": "Top Cloud Services Company",
+      "organization": "Cloud Excellence Awards",
+      "year": 2023,
+      "icon": "☁️"
+    },
+    {
+      "id": 3,
+      "title": "Innovation in AI/ML",
+      "organization": "AI Summit",
+      "year": 2024,
+      "icon": "🤖"
+    },
+    {
+      "id": 4,
+      "title": "Best Workplace",
+      "organization": "Great Place to Work",
+      "year": 2023,
+      "icon": "⭐"
+    },
+    {
+      "id": 5,
+      "title": "Cybersecurity Excellence",
+      "organization": "Security Awards",
+      "year": 2024,
+      "icon": "🔒"
+    }
+  ],
+  "values": [
+    {
+      "id": 1,
+      "title": "Innovation",
+      "description": "We push boundaries and embrace cutting-edge technologies to solve complex challenges.",
+      "icon": "💡"
+    },
+    {
+      "id": 2,
+      "title": "Excellence",
+      "description": "We strive for perfection in every project, delivering quality that exceeds expectations.",
+      "icon": "✨"
+    },
+    {
+      "id": 3,
+      "title": "Integrity",
+      "description": "We operate with honesty, transparency, and ethical practices in all our engagements.",
+      "icon": "🤝"
+    },
+    {
+      "id": 4,
+      "title": "Collaboration",
+      "description": "We believe in the power of teamwork and work closely with clients as partners.",
+      "icon": "👥"
+    },
+    {
+      "id": 5,
+      "title": "Diversity",
+      "description": "We celebrate diverse perspectives and create an inclusive environment for everyone.",
+      "icon": "🌍"
+    }
+  ],
+  "benefits": [
+    {
+      "id": 1,
+      "title": "Health Insurance",
+      "description": "Comprehensive medical, dental, and vision coverage",
+      "icon": "🏥"
+    },
+    {
+      "id": 2,
+      "title": "Flexible Work",
+      "description": "Remote work options and flexible hours",
+      "icon": "🏠"
+    },
+    {
+      "id": 3,
+      "title": "Learning Budget",
+      "description": "Annual budget for courses, conferences, and certifications",
+      "icon": "📚"
+    },
+    {
+      "id": 4,
+      "title": "Stock Options",
+      "description": "Equity participation in company growth",
+      "icon": "📈"
+    },
+    {
+      "id": 5,
+      "title": "Wellness Programs",
+      "description": "Gym memberships, mental health support, and wellness activities",
+      "icon": "🧘"
+    },
+    {
+      "id": 6,
+      "title": "Unlimited PTO",
+      "description": "Take time off when you need it to recharge",
+      "icon": "🌴"
+    },
+    {
+      "id": 7,
+      "title": "401(k) Matching",
+      "description": "Company matches up to 6% of your salary in retirement savings",
+      "icon": "💰"
+    },
+    {
+      "id": 8,
+      "title": "Life Insurance",
+      "description": "Comprehensive life and disability insurance coverage",
+      "icon": "🛡️"
+    },
+    {
+      "id": 9,
+      "title": "Professional Development",
+      "description": "Dedicated time and budget for skill development and career growth",
+      "icon": "🎓"
+    },
+    {
+      "id": 10,
+      "title": "Home Office Stipend",
+      "description": "Annual allowance for home office setup and equipment",
+      "icon": "🖥️"
+    },
+    {
+      "id": 11,
+      "title": "Employee Assistance Program",
+      "description": "24/7 confidential counseling and support services",
+      "icon": "💬"
+    },
+    {
+      "id": 12,
+      "title": "Commuter Benefits",
+      "description": "Pre-tax commuter benefits for public transportation and parking",
+      "icon": "🚇"
+    },
+    {
+      "id": 13,
+      "title": "Pet Insurance",
+      "description": "Optional pet insurance coverage for your furry family members",
+      "icon": "🐾"
+    },
+    {
+      "id": 14,
+      "title": "Sabbatical Program",
+      "description": "Extended paid leave after 5 years of service for personal growth",
+      "icon": "✈️"
+    },
+    {
+      "id": 15,
+      "title": "Charity Matching",
+      "description": "Company matches your charitable donations up to $5,000 per year",
+      "icon": "❤️"
+    },
+    {
+      "id": 16,
+      "title": "Fitness Reimbursement",
+      "description": "Monthly reimbursement for gym memberships and fitness activities",
+      "icon": "💪"
+    },
+    {
+      "id": 17,
+      "title": "Childcare Support",
+      "description": "Subsidized childcare and flexible arrangements for working parents",
+      "icon": "👶"
+    },
+    {
+      "id": 18,
+      "title": "Legal Services",
+      "description": "Access to legal consultation and document review services",
+      "icon": "⚖️"
+    }
+  ],
+  "images": {
+    "hero": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&h=1080&fit=crop",
+    "about": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop",
+    "services": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop",
+    "careers": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=800&fit=crop",
+    "contact": "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=800&fit=crop"
+  }
+}
