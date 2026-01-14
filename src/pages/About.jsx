@@ -741,7 +741,6 @@ const timelineItem = {
   position: 'relative',
   paddingLeft: '60px',
   paddingBottom: '50px',
-  borderLeft: '3px solid rgba(0, 245, 212, 0.3)',
   cursor: 'pointer',
 };
 
