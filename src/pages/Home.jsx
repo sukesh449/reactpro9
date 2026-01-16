@@ -47,10 +47,10 @@ export default function Home() {
     <>
       <section style={getHeroSectionStyle(windowWidth)}>
         {/* Animated Gradient Background */}
-        <div style={backgroundContainer}>
+        <div style={getBackgroundContainerStyle(windowWidth)}>
           {/* Animated Gradient Background */}
           <motion.div
-            style={animatedBackground}
+            style={getAnimatedBackgroundStyle(windowWidth)}
             animate={{
               background: [
                 'radial-gradient(circle at 20% 50%, rgba(0,245,212,0.15) 0%, rgba(0,0,0,0.9) 50%, rgba(123,44,191,0.15) 100%)',
@@ -67,12 +67,12 @@ export default function Home() {
           />
 
           {/* Animated Particles/Orbs Background */}
-          <div style={particlesContainer}>
+          <div style={getParticlesContainerStyle(windowWidth)}>
             {[...Array(30)].map((_, i) => (
               <motion.div
                 key={i}
                 style={{
-                  ...particle,
+                  ...getParticleStyle(windowWidth),
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,
                 }}
@@ -93,12 +93,12 @@ export default function Home() {
           </div>
 
           {/* Grid Pattern Overlay */}
-          <div style={gridPattern} />
+          <div style={getGridPatternStyle(windowWidth)} />
         </div>
         <div style={getOverlayStyle(windowWidth)}>
           {/* Animated Background Elements */}
           <motion.div
-            style={animatedCircle1}
+            style={getAnimatedCircle1Style(windowWidth)}
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
@@ -111,7 +111,7 @@ export default function Home() {
             }}
           />
           <motion.div
-            style={animatedCircle2}
+            style={getAnimatedCircle2Style(windowWidth)}
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.2, 0.5, 0.2],
@@ -214,7 +214,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          style={whyChooseHeader}
+          style={getWhyChooseHeaderStyle(windowWidth)}
         >
           <h2 style={getWhyChooseTitleStyle(windowWidth)}>Why Choose Nexoris?</h2>
           <p style={getWhyChooseSubtitleStyle(windowWidth)}>
@@ -744,6 +744,180 @@ const getWhyChooseCardDescStyle = (width) => {
     lineHeight: '1.7',
     wordWrap: 'break-word',
     maxWidth: '100%',
+  };
+};
+
+const getBackgroundContainerStyle = (width) => {
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+    overflow: 'hidden',
+    background: '#0a0a0a',
+    boxSizing: 'border-box',
+  };
+};
+
+const getWhyChooseHeaderStyle = (width) => {
+  if (width <= 768) {
+    return {
+      textAlign: 'center',
+      marginBottom: '30px',
+      padding: '0 20px',
+    };
+  }
+  return {
+    textAlign: 'center',
+    marginBottom: '50px',
+  };
+};
+
+const getAnimatedBackgroundStyle = (width) => {
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+    boxSizing: 'border-box',
+  };
+};
+
+const getAnimatedCircle1Style = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '300px',
+      height: '300px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+      top: '-100px',
+      right: '-100px',
+      filter: 'blur(30px)',
+      pointerEvents: 'none',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '600px',
+    height: '600px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+    top: '-200px',
+    right: '-200px',
+    filter: 'blur(40px)',
+    pointerEvents: 'none',
+  };
+};
+
+const getAnimatedCircle2Style = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '250px',
+      height: '250px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(123,44,191,0.15) 0%, transparent 70%)',
+      bottom: '-75px',
+      left: '-75px',
+      filter: 'blur(30px)',
+      pointerEvents: 'none',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '500px',
+    height: '500px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(123,44,191,0.15) 0%, transparent 70%)',
+    bottom: '-150px',
+    left: '-150px',
+    filter: 'blur(40px)',
+    pointerEvents: 'none',
+  };
+};
+
+const getParticlesContainerStyle = (width) => {
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
+    pointerEvents: 'none',
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getGridPatternStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundImage: `
+        linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px)
+      `,
+      backgroundSize: '30px 30px',
+      zIndex: 1,
+      pointerEvents: 'none',
+      width: '100%',
+      height: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundImage: `
+      linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px)
+    `,
+    backgroundSize: '50px 50px',
+    zIndex: 1,
+    pointerEvents: 'none',
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getParticleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '3px',
+      height: '3px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(0,245,212,0.8) 0%, rgba(123,44,191,0.4) 50%, transparent 100%)',
+      boxShadow: '0 0 15px rgba(0,245,212,0.6), 0 0 30px rgba(123,44,191,0.4)',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '4px',
+    height: '4px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(0,245,212,0.8) 0%, rgba(123,44,191,0.4) 50%, transparent 100%)',
+    boxShadow: '0 0 20px rgba(0,245,212,0.6), 0 0 40px rgba(123,44,191,0.4)',
   };
 };
 

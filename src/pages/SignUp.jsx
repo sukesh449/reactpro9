@@ -91,9 +91,9 @@ export default function SignUp() {
   return (
     <section style={getSectionStyle(windowWidth)}>
       {/* Animated Background */}
-      <div style={backgroundContainer}>
+      <div style={getBackgroundContainerStyle(windowWidth)}>
         <motion.div
-          style={animatedCircle1}
+          style={getAnimatedCircle1Style(windowWidth)}
           animate={{
             x: [0, 100, 0],
             y: [0, 100, 0],
@@ -106,7 +106,7 @@ export default function SignUp() {
           }}
         />
         <motion.div
-          style={animatedCircle2}
+          style={getAnimatedCircle2Style(windowWidth)}
           animate={{
             x: [0, -100, 0],
             y: [0, -100, 0],
@@ -119,7 +119,7 @@ export default function SignUp() {
           }}
         />
         <motion.div
-          style={animatedCircle3}
+          style={getAnimatedCircle3Style(windowWidth)}
           animate={{
             x: [0, 150, 0],
             y: [0, -150, 0],
@@ -133,30 +133,30 @@ export default function SignUp() {
         />
       </div>
 
-      <div style={contentContainer}>
+      <div style={getContentContainerStyle(windowWidth)}>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={header}
+          style={getHeaderStyle(windowWidth)}
         >
-          <Link to="/" style={logoLink}>
+          <Link to="/" style={getLogoLinkStyle(windowWidth)}>
             <motion.div
-              style={logo}
+              style={getLogoStyle(windowWidth)}
               whileHover={{ scale: 1.1, rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
               ⚡
             </motion.div>
-            <h1 style={logoText}>Nexoris</h1>
+            <h1 style={getLogoTextStyle(windowWidth)}>Nexoris</h1>
           </Link>
-          <h2 style={title}>Create Your Account</h2>
-          <p style={subtitle}>Join thousands of companies transforming their business</p>
+          <h2 style={getTitleStyle(windowWidth)}>Create Your Account</h2>
+          <p style={getSubtitleStyle(windowWidth)}>Join thousands of companies transforming their business</p>
         </motion.div>
 
         {/* Progress Steps */}
         <motion.div
-          style={stepsContainer}
+          style={getStepsContainerStyle(windowWidth)}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -483,6 +483,262 @@ const getSectionStyle = (width) => {
     justifyContent: 'center',
     width: '100%',
     maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getBackgroundContainerStyle = (width) => {
+  return {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflow: 'hidden',
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getAnimatedCircle1Style = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '250px',
+      height: '250px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(0,245,212,0.2) 0%, transparent 70%)',
+      top: '-125px',
+      left: '-125px',
+      filter: 'blur(30px)',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '400px',
+    height: '400px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(0,245,212,0.2) 0%, transparent 70%)',
+    top: '-200px',
+    left: '-200px',
+    filter: 'blur(40px)',
+  };
+};
+
+const getAnimatedCircle2Style = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '300px',
+      height: '300px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(123,44,191,0.2) 0%, transparent 70%)',
+      bottom: '-150px',
+      right: '-150px',
+      filter: 'blur(35px)',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '500px',
+    height: '500px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(123,44,191,0.2) 0%, transparent 70%)',
+    bottom: '-250px',
+    right: '-250px',
+    filter: 'blur(50px)',
+  };
+};
+
+const getAnimatedCircle3Style = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      width: '200px',
+      height: '200px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      filter: 'blur(25px)',
+    };
+  }
+  return {
+    position: 'absolute',
+    width: '350px',
+    height: '350px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    filter: 'blur(30px)',
+  };
+};
+
+const getContentContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'relative',
+      zIndex: 1,
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      padding: '0 10px',
+    };
+  }
+  return {
+    position: 'relative',
+    zIndex: 1,
+    width: '100%',
+    maxWidth: '600px',
+    boxSizing: 'border-box',
+  };
+};
+
+const getHeaderStyle = (width) => {
+  if (width <= 768) {
+    return {
+      textAlign: 'center',
+      marginBottom: '30px',
+      padding: '0 10px',
+    };
+  }
+  return {
+    textAlign: 'center',
+    marginBottom: '50px',
+  };
+};
+
+const getLogoLinkStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '12px',
+      textDecoration: 'none',
+      marginBottom: '25px',
+    };
+  }
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '15px',
+    textDecoration: 'none',
+    marginBottom: '30px',
+  };
+};
+
+const getLogoStyle = (width) => {
+  if (width <= 768) {
+    return {
+      width: '50px',
+      height: '50px',
+      borderRadius: '14px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '2rem',
+    };
+  }
+  return {
+    width: '60px',
+    height: '60px',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '2.5rem',
+  };
+};
+
+const getLogoTextStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      fontWeight: 800,
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      margin: 0,
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '2.5rem',
+    fontWeight: 800,
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    margin: 0,
+    wordWrap: 'break-word',
+  };
+};
+
+const getTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      fontWeight: 800,
+      color: '#fff',
+      marginBottom: '12px',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '3rem',
+    fontWeight: 800,
+    color: '#fff',
+    marginBottom: '15px',
+    wordWrap: 'break-word',
+  };
+};
+
+const getSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+      color: '#888',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.2rem',
+    color: '#888',
+    wordWrap: 'break-word',
+  };
+};
+
+const getStepsContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '40px',
+      padding: '0 10px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '50px',
+    width: '100%',
+    maxWidth: '100%',
     boxSizing: 'border-box',
   };
 };

@@ -79,7 +79,7 @@ export default function About() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        style={header}
+        style={getHeaderStyle(windowWidth)}
       >
         <h1 style={getTitleStyle(windowWidth)}>About Nexoris</h1>
         <p style={getSubtitleStyle(windowWidth)}>
@@ -1276,6 +1276,20 @@ const section = {
   padding: '120px 10vw 80px',
   background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
   minHeight: '100vh',
+};
+
+const getHeaderStyle = (width) => {
+  if (width <= 768) {
+    return {
+      textAlign: 'center',
+      marginBottom: '40px',
+      padding: '0 20px',
+    };
+  }
+  return {
+    textAlign: 'center',
+    marginBottom: '60px',
+  };
 };
 
 const header = {

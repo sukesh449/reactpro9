@@ -1,7 +1,18 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const footerLinks = {
     Company: ['About', 'Services', 'Careers', 'Contact'],
@@ -17,8 +28,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer style={footer}>
-      <div style={container}>
+    <footer style={getFooterStyle(windowWidth)}>
+      <div style={getContainerStyle(windowWidth)}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +96,7 @@ export default function Footer() {
       </div>
 
       <motion.div
-        style={bottomBar}
+        style={getBottomBarStyle(windowWidth)}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -103,6 +114,75 @@ export default function Footer() {
     </footer>
   );
 }
+
+const getFooterStyle = (width) => {
+  if (width <= 768) {
+    return {
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #000 100%)',
+      borderTop: '1px solid rgba(0, 245, 212, 0.1)',
+      padding: '50px 20px 30px',
+      color: '#fff',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+      overflowX: 'hidden',
+    };
+  } else if (width <= 1024) {
+    return {
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #000 100%)',
+      borderTop: '1px solid rgba(0, 245, 212, 0.1)',
+      padding: '60px 5vw 35px',
+      color: '#fff',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+      overflowX: 'hidden',
+    };
+  }
+  return {
+    background: 'linear-gradient(180deg, #0a0a0a 0%, #000 100%)',
+    borderTop: '1px solid rgba(0, 245, 212, 0.1)',
+    padding: '80px 10vw 40px',
+    color: '#fff',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+    overflowX: 'hidden',
+  };
+};
+
+const getContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '40px',
+      marginBottom: '40px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      gap: '40px',
+      marginBottom: '50px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'grid',
+    gridTemplateColumns: '2fr 1fr 1fr 1fr',
+    gap: '60px',
+    marginBottom: '60px',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
 
 const footer = {
   background: 'linear-gradient(180deg, #0a0a0a 0%, #000 100%)',
@@ -185,6 +265,35 @@ const linkStyle = {
   fontSize: '0.95rem',
   transition: 'color 0.3s ease',
   display: 'inline-block',
+};
+
+const getBottomBarStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: '30px',
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+      flexWrap: 'wrap',
+      gap: '15px',
+      textAlign: 'center',
+      width: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: '40px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+    flexWrap: 'wrap',
+    gap: '20px',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
 };
 
 const bottomBar = {

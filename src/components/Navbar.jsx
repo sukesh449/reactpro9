@@ -6,6 +6,8 @@ import Logo from '../assets/logo.svg';
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const location = useLocation();
 
   useEffect(() => {
@@ -14,6 +16,18 @@ export default function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth > 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const navLinks = [
@@ -57,10 +71,12 @@ export default function Navbar() {
   // Add Sign Up button
   const showSignUp = location.pathname !== '/signup';
 
+  const isMobile = windowWidth <= 768;
+
   return (
     <motion.nav
       style={{
-        ...nav,
+        ...getNavStyle(windowWidth),
         background: scrolled
           ? 'rgba(0, 0, 0, 0.95)'
           : 'rgba(0, 0, 0, 0.7)',
@@ -71,15 +87,63 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <motion.div
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: isMobile ? 1 : 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <Link to="/" style={logoLink}>
-          <img src={Logo} alt="logo" height={42} />
+          <img src={Logo} alt="logo" height={isMobile ? 32 : 42} />
         </Link>
       </motion.div>
 
-      <div style={links}>
+      {isMobile ? (
+        <>
+          <motion.button
+            style={mobileMenuButton}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </motion.button>
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                style={mobileMenu}
+              >
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <Link
+                      key={link.path || link.label}
+                      to={link.path}
+                      style={{
+                        ...mobileLinkStyle,
+                        color: isActive ? '#00F5D4' : '#fff',
+                      }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+                {showSignUp && (
+                  <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                    <motion.button
+                      style={mobileSignUpButton}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Sign Up
+                    </motion.button>
+                  </Link>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      ) : (
+        <div style={links}>
         {navLinks.map((link) => {
           const isActive = location.pathname === link.path;
           const hasDropdown = link.dropdown;
@@ -184,9 +248,39 @@ export default function Navbar() {
           </motion.div>
         )}
       </div>
+      )}
     </motion.nav>
   );
 }
+
+const getNavStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '15px 20px',
+      position: 'sticky',
+      top: 0,
+      zIndex: 999,
+      transition: 'all 0.3s ease',
+      width: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '20px 50px',
+    position: 'sticky',
+    top: 0,
+    zIndex: 999,
+    transition: 'all 0.3s ease',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+};
 
 const nav = {
   display: 'flex',
@@ -197,6 +291,71 @@ const nav = {
   top: 0,
   zIndex: 999,
   transition: 'all 0.3s ease',
+};
+
+const mobileMenuButton = {
+  padding: '10px 15px',
+  borderRadius: '8px',
+  border: '2px solid rgba(0, 245, 212, 0.3)',
+  background: 'rgba(0, 245, 212, 0.1)',
+  color: '#00F5D4',
+  fontSize: '1.5rem',
+  fontWeight: 700,
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minWidth: '44px',
+  minHeight: '44px',
+};
+
+const mobileMenu = {
+  position: 'absolute',
+  top: '100%',
+  left: 0,
+  right: 0,
+  background: 'rgba(0, 0, 0, 0.98)',
+  backdropFilter: 'blur(20px)',
+  border: '1px solid rgba(0, 245, 212, 0.2)',
+  borderRadius: '0 0 16px 16px',
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px',
+  width: '100%',
+  boxSizing: 'border-box',
+  zIndex: 1000,
+};
+
+const mobileLinkStyle = {
+  textDecoration: 'none',
+  fontWeight: 600,
+  fontSize: '1.1rem',
+  color: '#fff',
+  padding: '15px 20px',
+  borderRadius: '12px',
+  background: 'rgba(0, 245, 212, 0.05)',
+  border: '1px solid rgba(0, 245, 212, 0.2)',
+  transition: 'all 0.3s ease',
+  display: 'block',
+  textAlign: 'center',
+};
+
+const mobileSignUpButton = {
+  padding: '15px 30px',
+  borderRadius: '30px',
+  border: 'none',
+  background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+  color: '#000',
+  fontWeight: 700,
+  fontSize: '1rem',
+  cursor: 'pointer',
+  textDecoration: 'none',
+  display: 'block',
+  width: '100%',
+  textAlign: 'center',
+  boxShadow: '0 5px 20px rgba(0, 245, 212, 0.3)',
+  marginTop: '10px',
 };
 
 const logoLink = {
