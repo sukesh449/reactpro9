@@ -8,6 +8,7 @@ export default function About() {
   const [awards, setAwards] = useState([]);
   const [values, setValues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,15 @@ export default function About() {
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const tabs = [
@@ -60,34 +70,37 @@ export default function About() {
     return <div style={loadingStyle}>Loading...</div>;
   }
 
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth > 768 && windowWidth <= 1024;
+
   return (
-    <section style={section}>
+    <section style={getSectionStyle(windowWidth)}>
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         style={header}
       >
-        <h1 style={title}>About Nexoris</h1>
-        <p style={subtitle}>
+        <h1 style={getTitleStyle(windowWidth)}>About Nexoris</h1>
+        <p style={getSubtitleStyle(windowWidth)}>
           Leading the digital transformation revolution since 2004
         </p>
       </motion.div>
 
-      <div style={tabsContainer}>
+      <div style={getTabsContainerStyle(windowWidth)}>
         {tabs.map((tab) => (
           <motion.button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              ...tabButton,
-              ...(activeTab === tab.id ? activeTabButton : {}),
+              ...getTabButtonStyle(windowWidth),
+              ...(activeTab === tab.id ? getActiveTabButtonStyle() : {}),
             }}
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: isMobile ? 1 : 1.05, y: isMobile ? 0 : -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span style={tabIcon}>{tab.icon}</span>
-            {tab.label}
+            <span style={getTabIconStyle(windowWidth)}>{tab.icon}</span>
+            {windowWidth > 480 && tab.label}
           </motion.button>
         ))}
       </div>
@@ -107,16 +120,16 @@ export default function About() {
               initial="hidden"
               animate="visible"
             >
-              <div style={storySection}>
+              <div style={getStorySectionStyle(windowWidth)}>
                 <motion.div variants={itemVariants} style={storyHeader}>
-                  <h2 style={sectionTitle}>Our Journey</h2>
-                  <p style={introText}>
+                  <h2 style={getSectionTitleStyle(windowWidth)}>Our Journey</h2>
+                  <p style={getIntroTextStyle(windowWidth)}>
                     From a small startup to a global technology leader
                   </p>
                 </motion.div>
 
-                <motion.div variants={itemVariants} style={timelineContainer}>
-                  <div style={timeline}>
+                <motion.div variants={itemVariants} style={getTimelineContainerStyle(windowWidth)}>
+                  <div style={getTimelineStyle(windowWidth)}>
                     {[
                       {
                         year: '2004',
@@ -152,13 +165,13 @@ export default function About() {
                       <motion.div
                         key={milestone.year}
                         variants={itemVariants}
-                        style={timelineItem}
-                        whileHover={{ scale: 1.05 }}
+                        style={getTimelineItemStyle(windowWidth)}
+                        whileHover={{ scale: isMobile ? 1 : 1.05 }}
                       >
-                        <div style={timelineYear}>{milestone.year}</div>
-                        <div style={timelineContent}>
-                          <h3 style={timelineTitle}>{milestone.title}</h3>
-                          <p style={timelineDescription}>
+                        <div style={getTimelineYearStyle(windowWidth)}>{milestone.year}</div>
+                        <div style={getTimelineContentStyle(windowWidth)}>
+                          <h3 style={getTimelineTitleStyle(windowWidth)}>{milestone.title}</h3>
+                          <p style={getTimelineDescriptionStyle(windowWidth)}>
                             {milestone.description}
                           </p>
                         </div>
@@ -167,7 +180,7 @@ export default function About() {
                   </div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} style={statsGrid}>
+                <motion.div variants={itemVariants} style={getStatsGridStyle(windowWidth)}>
                   {[
                     { label: 'Founded', value: '2004', icon: '📅' },
                     { label: 'Employees', value: '2,500+', icon: '👨‍💼' },
@@ -179,12 +192,12 @@ export default function About() {
                     <motion.div
                       key={stat.label}
                       variants={itemVariants}
-                      style={statCard}
-                      whileHover={{ scale: 1.05, y: -5 }}
+                      style={getStatCardStyle(windowWidth)}
+                      whileHover={{ scale: isMobile ? 1 : 1.05, y: isMobile ? 0 : -5 }}
                     >
-                      <div style={statIcon}>{stat.icon}</div>
-                      <div style={statValue}>{stat.value}</div>
-                      <div style={statLabel}>{stat.label}</div>
+                      <div style={getStatIconStyle(windowWidth)}>{stat.icon}</div>
+                      <div style={getStatValueStyle(windowWidth)}>{stat.value}</div>
+                      <div style={getStatLabelStyle(windowWidth)}>{stat.label}</div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -610,6 +623,655 @@ export default function About() {
   );
 }
 
+// Responsive style functions
+const getSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '80px 20px 60px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      padding: '100px 5vw 70px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '120px 10vw 80px',
+    background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+    minHeight: '100vh',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2.5rem',
+      fontWeight: 800,
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '4rem',
+    fontWeight: 800,
+    marginBottom: '20px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.1rem',
+      color: '#888',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    color: '#888',
+  };
+};
+
+const getTabsContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      gap: '10px',
+      justifyContent: 'center',
+      marginBottom: '40px',
+      flexWrap: 'wrap',
+      padding: '15px',
+      background: 'rgba(0, 0, 0, 0.4)',
+      backdropFilter: 'blur(20px)',
+      borderRadius: '25px',
+      border: '1px solid rgba(0, 245, 212, 0.2)',
+      position: 'relative',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    gap: '15px',
+    justifyContent: 'center',
+    marginBottom: '60px',
+    flexWrap: 'wrap',
+    padding: '20px',
+    background: 'rgba(0, 0, 0, 0.4)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '30px',
+    border: '1px solid rgba(0, 245, 212, 0.2)',
+    position: 'relative',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTabButtonStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '10px 18px',
+      borderRadius: '25px',
+      border: '2px solid rgba(0, 245, 212, 0.3)',
+      background: 'rgba(0, 245, 212, 0.05)',
+      color: '#fff',
+      fontSize: '0.85rem',
+      fontWeight: 600,
+      cursor: 'pointer',
+      position: 'relative',
+      transition: 'all 0.3s ease',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+      whiteSpace: 'nowrap',
+    };
+  }
+  return {
+    padding: '14px 28px',
+    borderRadius: '30px',
+    border: '2px solid rgba(0, 245, 212, 0.3)',
+    background: 'rgba(0, 245, 212, 0.05)',
+    color: '#fff',
+    fontSize: '1rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+    position: 'relative',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    whiteSpace: 'nowrap',
+  };
+};
+
+const getActiveTabButtonStyle = () => {
+  return {
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    borderColor: 'transparent',
+    color: '#000',
+    boxShadow: '0 8px 30px rgba(0, 245, 212, 0.5), inset 0 2px 10px rgba(255, 255, 255, 0.1)',
+    fontWeight: 700,
+  };
+};
+
+const getTabIconStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+    };
+  }
+  return {
+    fontSize: '1.2rem',
+  };
+};
+
+const getSectionTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      fontWeight: 800,
+      marginBottom: '15px',
+      color: '#fff',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  } else if (width <= 1024) {
+    return {
+      fontSize: '2.5rem',
+      fontWeight: 800,
+      marginBottom: '18px',
+      color: '#fff',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+    };
+  }
+  return {
+    fontSize: '3rem',
+    fontWeight: 800,
+    marginBottom: '20px',
+    color: '#fff',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getIntroTextStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+      color: '#888',
+      fontStyle: 'italic',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.3rem',
+    color: '#888',
+    fontStyle: 'italic',
+  };
+};
+
+const getStorySectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      maxWidth: '100%',
+      margin: '0 auto',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      padding: '0 20px',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      maxWidth: '100%',
+      margin: '0 auto',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      padding: '0 30px',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    maxWidth: '1400px',
+    margin: '0 auto',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    width: '100%',
+    padding: '0 40px',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTimelineContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      marginBottom: '60px',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      paddingLeft: '110px',
+      paddingRight: '20px',
+      boxSizing: 'border-box',
+      position: 'relative',
+    };
+  } else if (width <= 1024) {
+    return {
+      marginBottom: '70px',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      paddingLeft: '130px',
+      paddingRight: '20px',
+      boxSizing: 'border-box',
+      position: 'relative',
+    };
+  }
+  return {
+    marginBottom: '80px',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    width: '100%',
+    maxWidth: '100%',
+    paddingLeft: '150px',
+    paddingRight: '40px',
+    boxSizing: 'border-box',
+    position: 'relative',
+  };
+};
+
+const getTimelineStyle = (width) => {
+  return {
+    position: 'relative',
+    paddingLeft: width <= 768 ? '0' : '0',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTimelineItemStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'relative',
+      paddingLeft: '20px',
+      paddingBottom: '40px',
+      paddingTop: '10px',
+      paddingRight: '0',
+      cursor: 'pointer',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      position: 'relative',
+      paddingLeft: '20px',
+      paddingBottom: '45px',
+      paddingRight: '0',
+      cursor: 'pointer',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    position: 'relative',
+    paddingLeft: '20px',
+    paddingBottom: '50px',
+    paddingRight: '0',
+    cursor: 'pointer',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTimelineYearStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      left: '-90px',
+      top: '0',
+      fontSize: '1.2rem',
+      fontWeight: 800,
+      color: '#00F5D4',
+      background: 'rgba(0, 245, 212, 0.1)',
+      padding: '8px 16px',
+      borderRadius: '20px',
+      border: '2px solid rgba(0, 245, 212, 0.3)',
+      whiteSpace: 'nowrap',
+      width: 'auto',
+      minWidth: '80px',
+      textAlign: 'center',
+      zIndex: 2,
+      overflow: 'visible',
+    };
+  } else if (width <= 1024) {
+    return {
+      position: 'absolute',
+      left: '-110px',
+      top: '0',
+      fontSize: '1.3rem',
+      fontWeight: 800,
+      color: '#00F5D4',
+      background: 'rgba(0, 245, 212, 0.1)',
+      padding: '9px 18px',
+      borderRadius: '20px',
+      border: '2px solid rgba(0, 245, 212, 0.3)',
+      whiteSpace: 'nowrap',
+      width: 'auto',
+      minWidth: '100px',
+      textAlign: 'center',
+      zIndex: 2,
+      overflow: 'visible',
+    };
+  }
+  return {
+    position: 'absolute',
+    left: '-120px',
+    top: '0',
+    fontSize: '1.5rem',
+    fontWeight: 800,
+    color: '#00F5D4',
+    background: 'rgba(0, 245, 212, 0.1)',
+    padding: '10px 20px',
+    borderRadius: '20px',
+    border: '2px solid rgba(0, 245, 212, 0.3)',
+    whiteSpace: 'nowrap',
+    width: 'auto',
+    minWidth: '100px',
+    textAlign: 'center',
+    zIndex: 2,
+    overflow: 'visible',
+  };
+};
+
+const getTimelineContentStyle = (width) => {
+  if (width <= 768) {
+    return {
+      background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+      padding: '20px',
+      borderRadius: '20px',
+      border: '1px solid rgba(0, 245, 212, 0.2)',
+      width: '100%',
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
+      boxSizing: 'border-box',
+      display: 'block',
+    };
+  }
+  return {
+    background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+    padding: '30px',
+    borderRadius: '20px',
+    border: '1px solid rgba(0, 245, 212, 0.2)',
+    width: '100%',
+    maxWidth: '100%',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    boxSizing: 'border-box',
+    display: 'block',
+  };
+};
+
+const getTimelineTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.2rem',
+      fontWeight: 700,
+      color: '#fff',
+      marginBottom: '10px',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
+      maxWidth: '100%',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    fontWeight: 700,
+    color: '#fff',
+    marginBottom: '10px',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    maxWidth: '100%',
+  };
+};
+
+const getTimelineDescriptionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '0.9rem',
+      color: '#aaa',
+      lineHeight: '1.6',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
+      maxWidth: '100%',
+    };
+  }
+  return {
+    fontSize: '1rem',
+    color: '#aaa',
+    lineHeight: '1.7',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    maxWidth: '100%',
+  };
+};
+
+const getStatsGridStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '15px',
+      marginBottom: '40px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      padding: '0',
+    };
+  } else if (width <= 1024) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: '18px',
+      marginBottom: '50px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      padding: '0',
+    };
+  }
+  return {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(6, 1fr)',
+    gap: '12px',
+    marginBottom: '60px',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    padding: '0',
+  };
+};
+
+const getStatCardStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '24px 16px',
+      borderRadius: '20px',
+      background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+      border: '1px solid rgba(0, 245, 212, 0.2)',
+      textAlign: 'center',
+      cursor: 'pointer',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      minWidth: '0',
+      overflow: 'visible',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
+  }
+  return {
+    padding: '25px 15px',
+    borderRadius: '24px',
+    background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+    border: '1px solid rgba(0, 245, 212, 0.2)',
+    textAlign: 'center',
+    cursor: 'pointer',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+    minWidth: '0',
+    overflow: 'visible',
+    overflowX: 'visible',
+    overflowY: 'visible',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+};
+
+const getStatIconStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      marginBottom: '12px',
+      display: 'block',
+      overflow: 'visible',
+    };
+  }
+  return {
+    fontSize: '2.5rem',
+    marginBottom: '15px',
+    display: 'block',
+    overflow: 'visible',
+  };
+};
+
+const getStatValueStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      fontWeight: 800,
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      marginBottom: '8px',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
+      maxWidth: '100%',
+      overflow: 'visible',
+      whiteSpace: 'normal',
+      lineHeight: '1.2',
+    };
+  }
+  return {
+    fontSize: '2.2rem',
+    fontWeight: 800,
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: '10px',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    maxWidth: '100%',
+    overflow: 'visible',
+    whiteSpace: 'normal',
+    lineHeight: '1.2',
+  };
+};
+
+const getStatLabelStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '0.85rem',
+      color: '#888',
+      fontWeight: 500,
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word',
+      maxWidth: '100%',
+    };
+  }
+  return {
+    fontSize: '1rem',
+    color: '#888',
+    fontWeight: 500,
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word',
+    maxWidth: '100%',
+  };
+};
+
 const section = {
   padding: '120px 10vw 80px',
   background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
@@ -692,6 +1354,11 @@ const activeTabIndicator = {
 
 const content = {
   minHeight: '600px',
+  width: '100%',
+  maxWidth: '100%',
+  overflowX: 'visible',
+  overflowY: 'visible',
+  boxSizing: 'border-box',
 };
 
 const loadingStyle = {

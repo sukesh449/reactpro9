@@ -7,6 +7,7 @@ export default function Services() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedService, setSelectedService] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -24,6 +25,15 @@ export default function Services() {
       }
     };
     fetchServices();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const categories = ['All', ...new Set(services.map((s) => s.category))];
@@ -67,8 +77,11 @@ export default function Services() {
     );
   }
 
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth > 768 && windowWidth <= 1024;
+
   return (
-    <section style={section}>
+    <section style={getSectionStyle(windowWidth)}>
       {/* Video Background */}
       <div style={videoContainer}>
         <video autoPlay muted loop playsInline style={backgroundVideo}>
@@ -89,7 +102,7 @@ export default function Services() {
           style={header}
         >
           <motion.h1
-            style={title}
+            style={getTitleStyle(windowWidth)}
             animate={{
               backgroundPosition: ['0%', '100%', '0%'],
             }}
@@ -101,7 +114,7 @@ export default function Services() {
           >
             Our Services
           </motion.h1>
-          <p style={subtitle}>
+          <p style={getSubtitleStyle(windowWidth)}>
             Comprehensive digital solutions powered by cutting-edge technology
           </p>
           <motion.div
@@ -606,6 +619,113 @@ export default function Services() {
     </section>
   );
 }
+
+// Responsive style functions for Services page
+const getSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'relative',
+      minHeight: '100vh',
+      padding: '80px 20px 60px',
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      position: 'relative',
+      minHeight: '100vh',
+      padding: '100px 5vw 70px',
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    position: 'relative',
+    minHeight: '100vh',
+    padding: '120px 10vw 80px',
+    overflow: 'hidden',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2.5rem',
+      fontWeight: 900,
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 50%, #00F5D4 100%)',
+      backgroundSize: '200% 200%',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      textShadow: '0 0 30px rgba(0, 245, 212, 0.5)',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  } else if (width <= 1024) {
+    return {
+      fontSize: '3.5rem',
+      fontWeight: 900,
+      marginBottom: '18px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 50%, #00F5D4 100%)',
+      backgroundSize: '200% 200%',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      textShadow: '0 0 35px rgba(0, 245, 212, 0.5)',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '5rem',
+    fontWeight: 900,
+    marginBottom: '20px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 50%, #00F5D4 100%)',
+    backgroundSize: '200% 200%',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    textShadow: '0 0 40px rgba(0, 245, 212, 0.5)',
+  };
+};
+
+const getSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.1rem',
+      color: '#aaa',
+      fontWeight: 400,
+      marginBottom: '30px',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  } else if (width <= 1024) {
+    return {
+      fontSize: '1.3rem',
+      color: '#aaa',
+      fontWeight: 400,
+      marginBottom: '35px',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    color: '#aaa',
+    fontWeight: 400,
+    marginBottom: '40px',
+    wordWrap: 'break-word',
+  };
+};
 
 const section = {
   position: 'relative',

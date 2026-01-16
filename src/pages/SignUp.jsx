@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +14,16 @@ export default function SignUp() {
   });
   const [currentStep, setCurrentStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const steps = [
     { id: 1, title: 'Account', icon: '👤' },
@@ -79,7 +89,7 @@ export default function SignUp() {
   };
 
   return (
-    <section style={section}>
+    <section style={getSectionStyle(windowWidth)}>
       {/* Animated Background */}
       <div style={backgroundContainer}>
         <motion.div
@@ -427,6 +437,55 @@ export default function SignUp() {
     </section>
   );
 }
+
+// Responsive style functions for SignUp page
+const getSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'relative',
+      minHeight: '100vh',
+      padding: '60px 20px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      position: 'relative',
+      minHeight: '100vh',
+      padding: '80px 5vw',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    position: 'relative',
+    minHeight: '100vh',
+    padding: '120px 10vw 80px',
+    background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+    overflow: 'hidden',
+    overflowX: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
 
 const section = {
   position: 'relative',

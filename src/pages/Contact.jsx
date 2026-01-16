@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Contact() {
@@ -10,6 +10,16 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,20 +82,20 @@ export default function Contact() {
   };
 
   return (
-    <section style={section}>
+    <section style={getSectionStyle(windowWidth)}>
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         style={header}
       >
-        <h1 style={title}>Get In Touch</h1>
-        <p style={subtitle}>
+        <h1 style={getTitleStyle(windowWidth)}>Get In Touch</h1>
+        <p style={getSubtitleStyle(windowWidth)}>
           Let's discuss how we can transform your business
         </p>
       </motion.div>
 
-      <div style={contentGrid}>
+      <div style={getContentGridStyle(windowWidth)}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -166,7 +176,7 @@ export default function Contact() {
           <motion.h2 variants={itemVariants} style={sectionTitle}>
             Our Offices
           </motion.h2>
-          <div style={officesGrid}>
+          <div style={getOfficesGridStyle(windowWidth)}>
             {offices.map((office, idx) => (
               <motion.div
                 key={office.city}
@@ -207,6 +217,134 @@ export default function Contact() {
     </section>
   );
 }
+
+// Responsive style functions for Contact page
+const getSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '80px 20px 60px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      padding: '100px 5vw 70px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '120px 10vw 80px',
+    background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+    minHeight: '100vh',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2.5rem',
+      fontWeight: 800,
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '4rem',
+    fontWeight: 800,
+    marginBottom: '20px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.1rem',
+      color: '#888',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    color: '#888',
+  };
+};
+
+const getContentGridStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '40px',
+      maxWidth: '100%',
+      margin: '0 auto',
+      width: '100%',
+      boxSizing: 'border-box',
+      overflowX: 'visible',
+    };
+  } else if (width <= 1024) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '50px',
+      maxWidth: '100%',
+      margin: '0 auto',
+      width: '100%',
+      boxSizing: 'border-box',
+      overflowX: 'visible',
+    };
+  }
+  return {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '60px',
+    maxWidth: '1400px',
+    margin: '0 auto',
+    width: '100%',
+    boxSizing: 'border-box',
+    overflowX: 'visible',
+  };
+};
+
+const getOfficesGridStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '20px',
+      width: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '25px',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+};
 
 const section = {
   padding: '120px 10vw 80px',

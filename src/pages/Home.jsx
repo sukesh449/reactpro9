@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import CompanyStats from '../components/CompanyStats';
 import GrowthChart from '../components/GrowthChart';
@@ -8,6 +9,16 @@ import Testimonials from '../components/Testimonials';
 import Investors from '../components/Investors';
 
 export default function Home() {
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,7 +45,7 @@ export default function Home() {
 
   return (
     <>
-      <section style={heroSection}>
+      <section style={getHeroSectionStyle(windowWidth)}>
         {/* Animated Gradient Background */}
         <div style={backgroundContainer}>
           {/* Animated Gradient Background */}
@@ -84,7 +95,7 @@ export default function Home() {
           {/* Grid Pattern Overlay */}
           <div style={gridPattern} />
         </div>
-        <div style={overlay}>
+        <div style={getOverlayStyle(windowWidth)}>
           {/* Animated Background Elements */}
           <motion.div
             style={animatedCircle1}
@@ -114,14 +125,14 @@ export default function Home() {
           />
 
           <motion.div
-            style={heroContent}
+            style={getHeroContentStyle(windowWidth)}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.h1
               variants={itemVariants}
-              style={heroTitle}
+              style={getHeroTitleStyle(windowWidth)}
               animate={{
                 textShadow: [
                   '0 0 20px rgba(0,245,212,0.5)',
@@ -137,34 +148,32 @@ export default function Home() {
             >
               Powering Global Digital Transformation
             </motion.h1>
-            <motion.p variants={itemVariants} style={heroSubtitle}>
+            <motion.p variants={itemVariants} style={getHeroSubtitleStyle(windowWidth)}>
               Trusted by Fortune 500 companies worldwide. We deliver cutting-edge technology solutions that drive innovation, accelerate growth, and transform businesses across 50+ countries.
             </motion.p>
-            <motion.div variants={itemVariants} style={heroStats}>
-              <div style={heroStatItem}>
-                <div style={heroStatNumber}>20+</div>
-                <div style={heroStatLabel}>Years Experience</div>
+            <motion.div variants={itemVariants} style={getHeroStatsStyle(windowWidth)}>
+              <div style={getHeroStatItemStyle(windowWidth)}>
+                <div style={getHeroStatNumberStyle(windowWidth)}>20+</div>
+                <div style={getHeroStatLabelStyle(windowWidth)}>Years Experience</div>
               </div>
-              <div style={heroStatItem}>
-                <div style={heroStatNumber}>2,500+</div>
-                <div style={heroStatLabel}>Team Members</div>
+              <div style={getHeroStatItemStyle(windowWidth)}>
+                <div style={getHeroStatNumberStyle(windowWidth)}>2,500+</div>
+                <div style={getHeroStatLabelStyle(windowWidth)}>Team Members</div>
               </div>
-              <div style={heroStatItem}>
-                <div style={heroStatNumber}>1,200+</div>
-                <div style={heroStatLabel}>Projects Delivered</div>
+              <div style={getHeroStatItemStyle(windowWidth)}>
+                <div style={getHeroStatNumberStyle(windowWidth)}>1,200+</div>
+                <div style={getHeroStatLabelStyle(windowWidth)}>Projects Delivered</div>
               </div>
-              <div style={heroStatItem}>
-                <div style={heroStatNumber}>500+</div>
-                <div style={heroStatLabel}>Global Clients</div>
+              <div style={getHeroStatItemStyle(windowWidth)}>
+                <div style={getHeroStatNumberStyle(windowWidth)}>500+</div>
+                <div style={getHeroStatLabelStyle(windowWidth)}>Global Clients</div>
               </div>
             </motion.div>
-            <motion.div variants={itemVariants} style={ctaContainer}>
+            <motion.div variants={itemVariants} style={getCtaContainerStyle(windowWidth)}>
               <motion.button
-                style={cta}
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0, 245, 212, 0.4)' }}
+                style={getCtaStyle(windowWidth)}
+                whileHover={{ scale: windowWidth > 768 ? 1.05 : 1, boxShadow: windowWidth > 768 ? '0 20px 40px rgba(0, 245, 212, 0.4)' : 'none' }}
                 whileTap={{ scale: 0.95 }}
-
-
                 onClick={() => {
                   document
                     .querySelector('#case-studies')
@@ -181,8 +190,8 @@ export default function Home() {
                 </motion.span>
               </motion.button>
               <motion.button
-                style={ctaSecondary}
-                whileHover={{ scale: 1.05 }}
+                style={getCtaSecondaryStyle(windowWidth)}
+                whileHover={{ scale: windowWidth > 768 ? 1.05 : 1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   window.location.href = '/services';
@@ -199,7 +208,7 @@ export default function Home() {
       <GrowthChart />
        */}
       {/* Why Choose Us Section */}
-      <section style={whyChooseSection}>
+      <section style={getWhyChooseSectionStyle(windowWidth)}>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -207,12 +216,12 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           style={whyChooseHeader}
         >
-          <h2 style={whyChooseTitle}>Why Choose Nexoris?</h2>
-          <p style={whyChooseSubtitle}>
+          <h2 style={getWhyChooseTitleStyle(windowWidth)}>Why Choose Nexoris?</h2>
+          <p style={getWhyChooseSubtitleStyle(windowWidth)}>
             We combine expertise, innovation, and dedication to deliver exceptional results
           </p>
         </motion.div>
-        <div style={whyChooseGrid}>
+        <div style={getWhyChooseGridStyle(windowWidth)}>
           {[
             {
               icon: '🚀',
@@ -251,12 +260,12 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              style={whyChooseCard}
-              whileHover={{ y: -10, scale: 1.02 }}
+              style={getWhyChooseCardStyle(windowWidth)}
+              whileHover={{ y: windowWidth > 768 ? -10 : 0, scale: windowWidth > 768 ? 1.02 : 1 }}
             >
-              <div style={whyChooseIcon}>{item.icon}</div>
-              <h3 style={whyChooseCardTitle}>{item.title}</h3>
-              <p style={whyChooseCardDesc}>{item.description}</p>
+              <div style={getWhyChooseIconStyle(windowWidth)}>{item.icon}</div>
+              <h3 style={getWhyChooseCardTitleStyle(windowWidth)}>{item.title}</h3>
+              <p style={getWhyChooseCardDescStyle(windowWidth)}>{item.description}</p>
             </motion.div>
           ))}
         </div>
@@ -272,6 +281,471 @@ export default function Home() {
     </>
   );
 }
+
+// Responsive style functions for Home page
+const getHeroSectionStyle = (width) => {
+  return {
+    height: '100vh',
+    position: 'relative',
+    overflow: 'hidden',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getHeroContentStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '20px 0',
+      maxWidth: '100%',
+      zIndex: 1,
+      marginTop: '60px',
+      marginBottom: '80px',
+      width: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '20px 0',
+    maxWidth: '800px',
+    zIndex: 1,
+    marginTop: '90px',
+    marginBottom: '130px',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getHeroTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.8rem',
+      fontWeight: 800,
+      lineHeight: '1.2',
+      marginBottom: '1.5rem',
+      background: 'linear-gradient(135deg, #fff 0%, #00F5D4 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  } else if (width <= 1024) {
+    return {
+      fontSize: '2.2rem',
+      fontWeight: 800,
+      lineHeight: '1.1',
+      marginBottom: '1.8rem',
+      background: 'linear-gradient(135deg, #fff 0%, #00F5D4 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '2.5rem',
+    fontWeight: 800,
+    lineHeight: '1.1',
+    marginBottom: '2rem',
+    background: 'linear-gradient(135deg, #fff 0%, #00F5D4 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getHeroSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+      fontWeight: 400,
+      color: '#ccc',
+      marginBottom: '2rem',
+      lineHeight: '1.6',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  } else if (width <= 1024) {
+    return {
+      fontSize: '1.2rem',
+      fontWeight: 400,
+      color: '#ccc',
+      marginBottom: '2.2rem',
+      lineHeight: '1.6',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    fontWeight: 400,
+    color: '#ccc',
+    marginBottom: '2.5rem',
+    lineHeight: '1.6',
+    wordWrap: 'break-word',
+  };
+};
+
+const getHeroStatsStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '20px',
+      marginBottom: '2rem',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      padding: '0 10px',
+    };
+  }
+  return {
+    display: 'flex',
+    gap: '40px',
+    marginBottom: '2.5rem',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+    flexWrap: 'wrap',
+  };
+};
+
+const getHeroStatItemStyle = (width) => {
+  if (width <= 768) {
+    return {
+      textAlign: 'center',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    textAlign: 'center',
+    flex: '1',
+    minWidth: '120px',
+  };
+};
+
+const getHeroStatNumberStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.8rem',
+      fontWeight: 800,
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      marginBottom: '8px',
+    };
+  }
+  return {
+    fontSize: '2.5rem',
+    fontWeight: 800,
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: '10px',
+  };
+};
+
+const getHeroStatLabelStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '0.85rem',
+      color: '#888',
+      fontWeight: 500,
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '1rem',
+    color: '#888',
+    fontWeight: 500,
+    wordWrap: 'break-word',
+  };
+};
+
+const getCtaContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '15px',
+      width: '100%',
+      maxWidth: '100%',
+      padding: '0 10px',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    gap: '20px',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getCtaStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '14px 32px',
+      borderRadius: '40px',
+      border: 'none',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      color: '#000',
+      fontWeight: 700,
+      fontSize: '0.95rem',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '10px',
+      boxShadow: '0 8px 25px rgba(0, 245, 212, 0.3)',
+      transition: 'all 0.3s ease',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '18px 48px',
+    borderRadius: '50px',
+    border: 'none',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    color: '#000',
+    fontWeight: 700,
+    fontSize: '1.1rem',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    boxShadow: '0 10px 30px rgba(0, 245, 212, 0.3)',
+    transition: 'all 0.3s ease',
+    width: 'auto',
+    boxSizing: 'border-box',
+  };
+};
+
+const getCtaSecondaryStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '14px 32px',
+      borderRadius: '40px',
+      border: '2px solid rgba(0, 245, 212, 0.5)',
+      background: 'transparent',
+      color: '#00F5D4',
+      fontWeight: 600,
+      fontSize: '0.95rem',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '18px 48px',
+    borderRadius: '50px',
+    border: '2px solid rgba(0, 245, 212, 0.5)',
+    background: 'transparent',
+    color: '#00F5D4',
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    width: 'auto',
+    boxSizing: 'border-box',
+  };
+};
+
+const getWhyChooseSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '60px 20px',
+      background: 'linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      padding: '80px 5vw',
+      background: 'linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '120px 10vw',
+    background: 'linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getWhyChooseTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2rem',
+      fontWeight: 800,
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '3rem',
+    fontWeight: 800,
+    marginBottom: '20px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getWhyChooseSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+      color: '#888',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.2rem',
+    color: '#888',
+    wordWrap: 'break-word',
+  };
+};
+
+const getWhyChooseGridStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(1, 1fr)',
+      gap: '20px',
+      marginTop: '40px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '30px',
+      marginTop: '60px',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '40px',
+    marginTop: '80px',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getWhyChooseCardStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '30px 20px',
+      borderRadius: '24px',
+      background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+      border: '1px solid rgba(0, 245, 212, 0.2)',
+      textAlign: 'center',
+      cursor: 'pointer',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+      overflow: 'visible',
+    };
+  }
+  return {
+    padding: '40px 30px',
+    borderRadius: '24px',
+    background: 'linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%)',
+    border: '1px solid rgba(0, 245, 212, 0.2)',
+    textAlign: 'center',
+    cursor: 'pointer',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+    overflow: 'visible',
+  };
+};
+
+const getWhyChooseIconStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '3rem',
+      marginBottom: '20px',
+      display: 'block',
+    };
+  }
+  return {
+    fontSize: '4rem',
+    marginBottom: '25px',
+    display: 'block',
+  };
+};
+
+const getWhyChooseCardTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.3rem',
+      fontWeight: 700,
+      color: '#fff',
+      marginBottom: '15px',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    fontWeight: 700,
+    color: '#fff',
+    marginBottom: '15px',
+    wordWrap: 'break-word',
+  };
+};
+
+const getWhyChooseCardDescStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '0.9rem',
+      color: '#aaa',
+      lineHeight: '1.6',
+      wordWrap: 'break-word',
+      maxWidth: '100%',
+    };
+  }
+  return {
+    fontSize: '1rem',
+    color: '#aaa',
+    lineHeight: '1.7',
+    wordWrap: 'break-word',
+    maxWidth: '100%',
+  };
+};
 
 const heroSection = {
   height: '100vh',
@@ -340,6 +814,60 @@ const particle = {
   boxShadow: '0 0 20px rgba(0,245,212,0.6), 0 0 40px rgba(123,44,191,0.4)',
   top: `${Math.random() * 100}%`,
   left: `${Math.random() * 100}%`,
+};
+
+const getOverlayStyle = (width) => {
+  if (width <= 768) {
+    return {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      padding: '0 20px',
+      color: '#fff',
+      zIndex: 2,
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      padding: '0 5vw',
+      color: '#fff',
+      zIndex: 2,
+      overflow: 'hidden',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    position: 'absolute',
+    inset: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    padding: '0 10vw',
+    color: '#fff',
+    zIndex: 2,
+    overflow: 'hidden',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
 };
 
 const overlay = {

@@ -7,6 +7,7 @@ export default function Careers() {
   const [jobs, setJobs] = useState([]);
   const [benefits, setBenefits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +27,15 @@ export default function Careers() {
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const tabs = [
@@ -58,35 +68,38 @@ export default function Careers() {
     return <div style={loadingStyle}>Loading...</div>;
   }
 
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth > 768 && windowWidth <= 1024;
+
   return (
-    <section style={section}>
+    <section style={getSectionStyle(windowWidth)}>
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         style={header}
       >
-        <h1 style={title}>Join Our Team</h1>
-        <p style={subtitle}>
+        <h1 style={getTitleStyle(windowWidth)}>Join Our Team</h1>
+        <p style={getSubtitleStyle(windowWidth)}>
           Build the future of digital transformation with 2,500+ professionals
           worldwide
         </p>
       </motion.div>
 
-      <div style={tabsContainer}>
+      <div style={getTabsContainerStyle(windowWidth)}>
         {tabs.map((tab) => (
           <motion.button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              ...tabButton,
+              ...getTabButtonStyle(windowWidth),
               ...(activeTab === tab.id ? activeTabButton : {}),
             }}
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: isMobile ? 1 : 1.05, y: isMobile ? 0 : -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span style={tabIcon}>{tab.icon}</span>
-            {tab.label}
+            <span style={getTabIconStyle(windowWidth)}>{tab.icon}</span>
+            {windowWidth > 480 && tab.label}
           </motion.button>
         ))}
       </div>
@@ -515,6 +528,166 @@ export default function Careers() {
     </section>
   );
 }
+
+// Responsive style functions for Careers page
+const getSectionStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '80px 20px 60px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  } else if (width <= 1024) {
+    return {
+      padding: '100px 5vw 70px',
+      background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    padding: '120px 10vw 80px',
+    background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+    minHeight: '100vh',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '2.5rem',
+      fontWeight: 800,
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      wordWrap: 'break-word',
+    };
+  }
+  return {
+    fontSize: '4rem',
+    fontWeight: 800,
+    marginBottom: '20px',
+    background: 'linear-gradient(135deg, #00F5D4 0%, #7B2CBF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+  };
+};
+
+const getSubtitleStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1.1rem',
+      color: '#888',
+      wordWrap: 'break-word',
+      padding: '0 10px',
+    };
+  }
+  return {
+    fontSize: '1.5rem',
+    color: '#888',
+  };
+};
+
+const getTabsContainerStyle = (width) => {
+  if (width <= 768) {
+    return {
+      display: 'flex',
+      gap: '10px',
+      justifyContent: 'center',
+      marginBottom: '40px',
+      flexWrap: 'wrap',
+      padding: '15px',
+      background: 'rgba(0, 0, 0, 0.4)',
+      backdropFilter: 'blur(20px)',
+      borderRadius: '25px',
+      border: '1px solid rgba(0, 245, 212, 0.2)',
+      position: 'relative',
+      overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100%',
+      boxSizing: 'border-box',
+    };
+  }
+  return {
+    display: 'flex',
+    gap: '15px',
+    justifyContent: 'center',
+    marginBottom: '60px',
+    flexWrap: 'wrap',
+    padding: '20px',
+    background: 'rgba(0, 0, 0, 0.4)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '30px',
+    border: '1px solid rgba(0, 245, 212, 0.2)',
+    position: 'relative',
+    overflowX: 'hidden',
+    width: '100%',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+};
+
+const getTabButtonStyle = (width) => {
+  if (width <= 768) {
+    return {
+      padding: '10px 18px',
+      borderRadius: '25px',
+      border: '2px solid rgba(0, 245, 212, 0.3)',
+      background: 'rgba(0, 245, 212, 0.05)',
+      color: '#fff',
+      fontSize: '0.85rem',
+      fontWeight: 600,
+      cursor: 'pointer',
+      position: 'relative',
+      transition: 'all 0.3s ease',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+      whiteSpace: 'nowrap',
+    };
+  }
+  return {
+    padding: '14px 28px',
+    borderRadius: '30px',
+    border: '2px solid rgba(0, 245, 212, 0.3)',
+    background: 'rgba(0, 245, 212, 0.05)',
+    color: '#fff',
+    fontSize: '1rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+    position: 'relative',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    whiteSpace: 'nowrap',
+  };
+};
+
+const getTabIconStyle = (width) => {
+  if (width <= 768) {
+    return {
+      fontSize: '1rem',
+    };
+  }
+  return {
+    fontSize: '1.2rem',
+  };
+};
 
 const section = {
   padding: '120px 10vw 80px',
